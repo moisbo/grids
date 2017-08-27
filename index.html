@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grid Generator</title>
+</head>
+<body>
+
+<div class="center">
+  <div style="width:640px;padding-top:50px;padding-bottom: 2em;">
+    <label class="label">Grid<br/>
+      <label>A
+        <input class="inputMaxGrid" type="range" value="8" min="0" max="100" onchange="grid({A:this.value})"/>
+      </label>
+      <label>F
+        <input class="inputMaxGrid" type="range" value="8" min="0" max="100" onchange="grid({F:this.value})"/>
+      </label>
+      <label>Stroke Width
+        <input class="inputMaxGrid" type="range" value="8" min="0" max="100" onchange="grid({strokeWidth:this.value})"/>
+      </label>
+      <label>rect Size
+        <input class="inputMaxGrid" type="range" value="80" min="0" max="100"
+               onchange="grid({rectDimWidth:this.value})"/>
+      </label>
+      <label>Grid Size
+        <input class="inputMaxGrid" type="range" value="80" min="0" max="100"
+               onchange="grid({gridDimWidth:this.value})"/>
+      </label>
+      <label>Max Value
+        <input type="number" value="100" onchange="maxGrid(this.value, this.className)">
+      </label>
+    </label>
+    <label class="label">Small Grid<br/>
+      <label>A
+        <input class="inputMaxSmallGrid" type="range" value="8" min="0" max="100" onchange="smallGrid({A:this.value})"/>
+      </label>
+      <label>F
+        <input class="inputMaxSmallGrid" type="range" value="8" min="0" max="100" onchange="smallGrid({F:this.value})"/>
+      </label>
+      <label>Small Grid Size
+        <input class="inputMaxSmallGrid" type="range" value="8" min="0" max="100"
+               onchange="smallGrid({gridDimWidth:this.value})"/>
+      </label>
+      <label>Small Rect Size
+        <input class="inputMaxSmallGrid" type="range" value="80" min="0" max="100"
+               onchange="smallGrid({rectDimWidth:this.value})"/>
+      </label>
+      <label>Max Value
+        <input class="inputMaxSmallGrid" type="number" value="100" onchange="maxGrid(this.value, this.className)">
+      </label>
+    </label>
+  </div>
+  <div class="controls">
+    <label>Width: <input type="number" value="300" id="width"/>mm</label>
+    <label>Height: <input type="number" value="400" id="height"/>mm</label>
+    <button onclick="resize()">Resize</button>
+    <button onclick="generateSVG()">Generate</button>
+    <a style="display: none;" id="link" href="" download="pattern.svg">Download</a>
+  </div>
+  <div class="view">
+    <svg id="svg" width="100%" height="100%"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="smallGrid" width="8" height="8" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="smalRect" width="80" height="80" fill="url(#smallGrid)"></rect>
+          <path id="smallPath" d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="grid" width="80" height="80" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="rect" width="80" height="80" fill="url(#smallGrid)"></rect>
+          <path id="gridPath" d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"></rect>
+    </svg>
+  </div>
+</div>
+<script>
+
+  (function () {
+    maxGrid(100, 'inputMaxGrid');
+    maxGrid(100, 'inputMaxSmallGrid');
+  })();
+
+  function grid(o) {
+    const path = document.getElementById('gridPath');
+    const d = path.getAttribute('d');
+    const ds = d.split(/\s/);
+    let s = o.A || o.F;
+    const newD = `M ${s || ds[1]} ${o.B || ds[2]} L ${o.C || ds[4]} ${o.D || ds[5]} ${o.E || ds[6]} ${s || ds[7]}`;
+    path.setAttribute('d', newD);
+    const strokeWidth = path.getAttribute('stroke-width');
+    path.setAttribute('stroke-width', o.strokeWidth || strokeWidth);
+    const rect = document.getElementById('rect');
+    const rectDim = {width: rect.getAttribute('width'), height: rect.getAttribute('height')};
+    rect.setAttribute('width', o.rectDimWidth || rectDim.width);
+    rect.setAttribute('height', o.rectDimWidth || rectDim.height);
+    const grid = document.getElementById('grid');
+    const gridDim = {width: grid.getAttribute('width'), height: grid.getAttribute('height')};
+    grid.setAttribute('width', o.gridDimWidth || gridDim.width);
+    grid.setAttribute('height', o.gridDimWidth || gridDim.height);
+  }
+
+  function smallGrid(o) {
+    const path = document.getElementById('smallPath');
+    const d = path.getAttribute('d');
+    const ds = d.split(/\s/);
+    let s = o.A || o.F;
+    const newD = `M ${s || ds[1]} ${o.B || ds[2]} L ${o.C || ds[4]} ${o.D || ds[5]} ${o.E || ds[6]} ${s || ds[7]}`;
+    path.setAttribute('d', newD);
+    const rect = document.getElementById('smalRect');
+    const rectDim = {width: rect.getAttribute('width'), height: rect.getAttribute('height')};
+    rect.setAttribute('width', o.rectDimWidth || rectDim.width);
+    rect.setAttribute('height', o.rectDimWidth || rectDim.height);
+    const grid = document.getElementById('smallGrid');
+    const gridDim = {width: grid.getAttribute('width'), height: grid.getAttribute('height')};
+    grid.setAttribute('width', o.gridDimWidth || gridDim.width);
+    grid.setAttribute('height', o.gridDimWidth || gridDim.height);
+  }
+
+  function maxGrid(val, className) {
+    const maxGrids = document.getElementsByClassName(className);
+    Array.from(maxGrids).forEach(function (el) {
+      el.setAttribute('max', val);
+    });
+  }
+
+  function resize() {
+    const svg = document.getElementById('svg');
+    const width = document.getElementById('width');
+    const height = document.getElementById('height');
+    svg.setAttribute('width', width.value + 'mm');
+    svg.setAttribute('height', height.value + 'mm');
+  }
+
+  function generateSVG() {
+    //get svg element.
+    const svg = document.getElementById("svg");
+
+    //get svg source.
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(svg);
+
+    //add name spaces.
+    if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+      source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
+      source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+    }
+
+    //add xml declaration
+    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+    //convert svg source to URI data scheme.
+    const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+
+    //set url value to a element's href attribute.
+    document.getElementById("link").href = url;
+    document.getElementById("link").style = "display:inline;"
+    //you can download svg file by right click menu.
+  }
+</script>
+<style>
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .label {
+    display: block;
+    border-bottom: solid 1px cadetblue;
+    padding: 10px;
+  }
+
+  .controls {
+    border-bottom: solid 1px cadetblue;
+    padding: 10px;
+  }
+
+  .view {
+    width: 640px;
+    height: 480px;
+  }
+
+</style>
+</body>
+</html>
