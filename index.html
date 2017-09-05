@@ -5,9 +5,11 @@
   <title>Grid Generator</title>
 </head>
 <body>
-
 <div class="center">
-  <div style="width:640px;padding-top:50px;padding-bottom: 2em;">
+  <div class="header">
+    <h2>Knit with Grids!</h2>
+  </div>
+  <div class="controls-top">
     <label class="label">Grid<br/>
       <label>Stroke Width
         <input class="inputMaxGrid" type="number" value="2" min="0" onchange="grid({strokeWidth:this.value})"/>
@@ -34,13 +36,16 @@
     </label>
   </div>
   <div class="controls">
-    <label>Width: <input type="number" value="300" id="width"/>mm</label>
-    <label>Height: <input type="number" value="400" id="height"/>mm</label>
-    <button onclick="resize()">Resize</button>
-    <button onclick="generateSVG()">Generate</button>
-    <a style="display: none;" id="link" href="" download="pattern.svg">Download</a>
+    <label>SVG<br/>
+      <label>Width: <input type="number" value="300" id="width"/>mm</label>
+      <label>Height: <input type="number" value="400" id="height"/>mm</label>
+      <button onclick="resize()">Resize</button>
+      <button onclick="generateSVG()">Generate</button>
+      <a style="display: none;" id="link" href="" download="pattern.svg">Download</a>
+    </label>
   </div>
   <div class="sample">
+    <p>Sample</p>
     <div class="view">
       <svg id="svg" width="100%" height="100%"
            xmlns="http://www.w3.org/2000/svg">
@@ -57,6 +62,9 @@
         <rect width="100%" height="100%" fill="url(#grid)"></rect>
       </svg>
     </div>
+  </div>
+  <div class="footer">
+    <p>Tested with Google Chrome version 60</p>
   </div>
 </div>
 <script>
@@ -152,12 +160,17 @@
   }
 </script>
 <style>
-  .center {
+  html, body {
+    height: 100%;
+  }
+
+  body {
     margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .center {
+    display: inline-block;
   }
 
   .label {
@@ -166,9 +179,18 @@
     padding: 10px;
   }
 
+  .header {
+  }
+
+  .controls-top {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
   .controls {
     border-bottom: solid 1px cadetblue;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .sample {
@@ -180,6 +202,11 @@
     width: 640px;
     height: 480px;
     overflow: auto;
+  }
+
+  .footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
 </style>
