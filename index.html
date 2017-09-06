@@ -96,23 +96,23 @@
 <div class="controls">
   <p><b>Settings that change the graph appearance (see sample below)</b>:</p>
   <div class="control-inter">
-    <label>Major grid lines:
+    <span>Major grid lines:
       <label>Stroke Width
-        <input class="inputMaxGrid" type="number" value="2" min="0" onchange="grid({strokeWidth:this.value})"/>
+        <input type="number" value="2" min="0" onchange="grid({strokeWidth:this.value})"/>
       </label>
       <label> Size
-        <input class="inputMaxGrid" type="number" value="80" min="0"
+        <input type="number" value="80" min="0"
                onchange="grid({gridDimWidth:this.value})"/>
       </label>
       <label>Color
         <input class="gridColor" value="#000000" type="color" onchange="grid({color:this.value})"/>
       </label>
-    </label>
+    </span>
   </div>
   <div class="control-inter">
-    <label>Minor grid lines:
+    <span>Minor grid lines:
       <label>Stroke Width
-        <input class="inputMaxGrid" type="number" value="2" min="0" onchange="smallGrid({strokeWidth:this.value})"/>
+        <input type="number" value="2" min="0" onchange="smallGrid({strokeWidth:this.value})"/>
       </label>
       <label>Size
         <input class="inputMaxSmallGrid" type="number" value="8" min="0"
@@ -121,7 +121,7 @@
       <label>Color
         <input class="smallGridColor" value="#000000" type="color" onchange="smallGrid({color:this.value})"/>
       </label>
-    </label>
+    </span>
   </div>
 </div>
 </div>
