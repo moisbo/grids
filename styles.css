@@ -3,6 +3,7 @@ html, body {
 }
 
 body {
+  font-family: sans-serif;
   margin: 20px;
   background-color: #FFF8F0;
 }
@@ -19,6 +20,7 @@ input[type="number"] {
 }
 
 .show-help {
+  font-size: smaller;
   display: block;
   margin-left: 30px;
   margin-bottom: 20px;
@@ -26,8 +28,6 @@ input[type="number"] {
 
 .hide-help {
   display: none;
-  margin-left: 30px;
-  margin-bottom: 20px;
 }
 
 .controls {
