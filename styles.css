@@ -16,17 +16,21 @@ input[type="number"] {
   display: inline-block;
 }
 
-.header {
+.intro {
+  margin-right: 50px;
 }
 
-.show-help {
+.help {
   font-size: smaller;
-  display: block;
   margin-left: 30px;
   margin-bottom: 20px;
 }
 
-.hide-help {
+.show {
+  display: inline-block;
+}
+
+.hide {
   display: none;
 }
 
@@ -36,7 +40,7 @@ input[type="number"] {
 }
 
 .control-inter {
-  padding: 0.2em;
+  padding: 0.3em;
 }
 
 .footer {

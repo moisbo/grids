@@ -1,11 +1,11 @@
-function toggleHelp(o) {
-  const help = document.getElementById('help');
-  if (help.className === 'show-help') {
-    help.className = 'hide-help';
-    o.innerHTML = 'Show Help';
+function toggle(name, id, o) {
+  const help = document.getElementById(id);
+  if (help.className === 'show') {
+    help.className = 'hide';
+    o.innerHTML = 'Show ' + name;
   } else {
-    help.className = 'show-help';
-    o.innerHTML = 'Hide Help';
+    help.className = 'show';
+    o.innerHTML = 'Hide ' + name;
   }
 }
 
@@ -14,25 +14,28 @@ function grid(o) {
   const grid = document.getElementById('grid');
   const gridDim = {width: grid.getAttribute('width'), height: grid.getAttribute('height')};
   grid.setAttribute('width', o.gridDimWidth || gridDim.width);
-  grid.setAttribute('height', o.gridDimWidth || gridDim.height);
+  grid.setAttribute('height', o.gridDimHeight || gridDim.height);
   //gridPath
   const path = document.getElementById('gridPath');
   const d = path.getAttribute('d');
   const ds = d.split(/\s/);
-  let s = o.A || o.F || o.gridDimWidth || o.gridDimWidth || o.rectDimWidth;
-  const newD = `M ${s || ds[1]} ${o.B || ds[2]} L ${o.C || ds[4]} ${o.D || ds[5]} ${o.E || ds[6]} ${s || ds[7]}`;
+  o.A = o.gridDimWidth || o.A;
+  o.F = o.gridDimHeight || o.F;
+  const newD = `M ${o.A || ds[1]} ${o.B || ds[2]} L ${o.C || ds[4]} ${o.D || ds[5]} ${o.E || ds[6]} ${o.F || ds[7]}`;
   path.setAttribute('d', newD);
   //stroke-width
   const strokeWidth = path.getAttribute('stroke-width');
   path.setAttribute('stroke-width', o.strokeWidth || strokeWidth);
   //color
-  const strokeColor = path.getAttribute('stroke');
-  path.setAttribute('stroke', o.color || strokeColor);
+  if (o.color) {
+    const strokeColor = path.getAttribute('stroke');
+    path.setAttribute('stroke', o.color.toRGBString() || strokeColor);
+  }
   //rect
   const rect = document.getElementById('rect');
   const rectDim = {width: rect.getAttribute('width'), height: rect.getAttribute('height')};
   rect.setAttribute('width', o.gridDimWidth || rectDim.width);
-  rect.setAttribute('height', o.gridDimWidth || rectDim.height);
+  rect.setAttribute('height', o.gridDimHeight || rectDim.height);
 }
 
 function smallGrid(o) {
@@ -40,25 +43,28 @@ function smallGrid(o) {
   const path = document.getElementById('smallPath');
   const d = path.getAttribute('d');
   const ds = d.split(/\s/);
-  let s = o.A || o.F || o.gridDimWidth;
-  const newD = `M ${s || ds[1]} ${o.B || ds[2]} L ${o.C || ds[4]} ${o.D || ds[5]} ${o.E || ds[6]} ${s || ds[7]}`;
+  o.A = o.gridDimWidth || o.A;
+  o.F = o.gridDimHeight || o.F;
+  const newD = `M ${o.A || ds[1]} ${o.B || ds[2]} L ${o.C || ds[4]} ${o.D || ds[5]} ${o.E || ds[6]} ${o.F || ds[7]}`;
   path.setAttribute('d', newD);
   //stroke-width
   const strokeWidth = path.getAttribute('stroke-width');
   path.setAttribute('stroke-width', o.strokeWidth || strokeWidth);
   //color
-  const strokeColor = path.getAttribute('stroke');
-  path.setAttribute('stroke', o.color || strokeColor);
+  if (o.color) {
+    const strokeColor = path.getAttribute('stroke');
+    path.setAttribute('stroke', o.color.toRGBString() || strokeColor);
+  }
   //rect
   const rect = document.getElementById('smalRect');
   const rectDim = {width: rect.getAttribute('width'), height: rect.getAttribute('height')};
   rect.setAttribute('width', o.rectDimWidth || rectDim.width);
-  rect.setAttribute('height', o.rectDimWidth || rectDim.height);
+  rect.setAttribute('height', o.rectDimHeight || rectDim.height);
   //smallGrid
   const grid = document.getElementById('smallGrid');
   const gridDim = {width: grid.getAttribute('width'), height: grid.getAttribute('height')};
   grid.setAttribute('width', o.gridDimWidth || gridDim.width);
-  grid.setAttribute('height', o.gridDimWidth || gridDim.height);
+  grid.setAttribute('height', o.gridDimHeight || gridDim.height);
 }
 
 

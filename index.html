@@ -5,80 +5,72 @@
   <title>Knitting Graph Paper Generator</title>
   <link rel="stylesheet" href="styles.css"/>
   <script src="app.js"></script>
+  <script src="lib/jscolor.min.js"></script>
 </head>
 <body>
+<a href="https://github.com/moisbo/grids"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
 <div class="header">
   <h2>Create Graph Paper for Knitters</h2>
-  <p>When you need to graph a pattern for knitting, it is really helpful if
+  <p class="intro">When you need to graph a pattern for knitting, it is really helpful if
     the graph paper grid corresponds with the knitting stitch size. This web application can help
     you to create some graph paper that matches your knitting. If you have not used this
     web application before then please read the help below.
   </p>
-  <button onclick="toggleHelp(this)">Show Help</button>
-  <div class="hide-help" id="help">
-    <h2>1. Create the test swatch</h2>
-
-    <p>The first thing to do is to knit a small swatch (sometimes called a tension square)
-      using the yarn and needles which you intend to use for the main garment. That's
-      right, a test swatch, an often-overlooked requirement!
-    </p>
-    <ol>
-      <li>Cast on enough stitches to make at least 15 cm width of knitting.
-        The exact number does not really matter.
-      </li>
-      <li>Now knit enough rows to make at least 15 cm of fabric.</li>
-      <li>Cast off. Your test swatch is completed but not blocked.</li>
-    </ol>
-
-    <h2>2. Block the test swatch</h2>
-
-    <p>Blocking is the term given to pressing or otherwise setting your work to prevent it
-      from distorting. Depending on your material, blocking can be a simple process.
-      Here is one method which works with Marlyn Alpaca and most natural fibres:
-    </p>
-
-    <ol>
-      <li>Pin the test swatch to an ironing board, ensuring that it is square and not distorted.</li>
-      <li>Spray lightly with water.</li>
-      <li>Leave it to dry (could be overnight).</li>
-      <li>When it is dry, your test swatch is blocked and should be stable.</li>
-    </ol>
-
-    <p>It is a good idea to label your test swatch with details of the yarn,
-      needle size (hand knit) or tension settings (machine knit).
-    </p>
-
-    <h2>3. Measure the test swatch</h2>
-
-    <p>Measuring the number of stitches per 10 cm of fabric gives you a good
-      idea as to how many stitches and rows you will need for your garment.
-    </p>
-
-    <ol>
-      <li>Using a flat rule, place it across the test swatch so you can see a 10 cm
-        portion in the middle of the knitting. Make sure the knitting is not stretched
-        or distorted. Write down how many <b>stitches</b> you can count in the 10 cm portion.
-        Near enough is OK.
-      </li>
-      <li>Rotate the rule now so it is going down the work, and count how many <b>rows</b>
-        you see in a 10 cm portion of the middle of the work. Again near enough is OK.
-      </li>
-    </ol>
-
-    <h2>4. Now make your graph paper</h2>
-
-    <p>Now that you have the number of stitches and rows for a 10 cm portion of
-      knitted fabric, we can insert those values into the form above and generate a
-      sheet of graph paper which has been customised for your fabric.
-    </p>
-
-    <p>There are some additional options that you may find useful such as sheet
-      size (A4 or A3 portrait), whether you want a darker line every 10 stitches and rows,
-      and whether you want the graph paper as a printable PDF file or whether
-      you intend to do something else with it such as edit your picture onto it,
-      which will be an SVG file.
-    </p>
-
+  <button onclick="toggle('Help', 'help', this)">Show Help</button>
+  <div class="hide" id="help">
+    <div class="help">
+      <h2>1. Create the test swatch</h2>
+      <p>The first thing to do is to knit a small swatch (sometimes called a tension square)
+        using the yarn and needles which you intend to use for the main garment. That's
+        right, a test swatch, an often-overlooked requirement!
+      </p>
+      <ol>
+        <li>Cast on enough stitches to make at least 15 cm width of knitting.
+          The exact number does not really matter.
+        </li>
+        <li>Now knit enough rows to make at least 15 cm of fabric.</li>
+        <li>Cast off. Your test swatch is completed but not blocked.</li>
+      </ol>
+      <h2>2. Block the test swatch</h2>
+      <p>Blocking is the term given to pressing or otherwise setting your work to prevent it
+        from distorting. Depending on your material, blocking can be a simple process.
+        Here is one method which works with Marlyn Alpaca and most natural fibres:
+      </p>
+      <ol>
+        <li>Pin the test swatch to an ironing board, ensuring that it is square and not distorted.</li>
+        <li>Spray lightly with water.</li>
+        <li>Leave it to dry (could be overnight).</li>
+        <li>When it is dry, your test swatch is blocked and should be stable.</li>
+      </ol>
+      <p>It is a good idea to label your test swatch with details of the yarn,
+        needle size (hand knit) or tension settings (machine knit).
+      </p>
+      <h2>3. Measure the test swatch</h2>
+      <p>Measuring the number of stitches per 10 cm of fabric gives you a good
+        idea as to how many stitches and rows you will need for your garment.
+      </p>
+      <ol>
+        <li>Using a flat rule, place it across the test swatch so you can see a 10 cm
+          portion in the middle of the knitting. Make sure the knitting is not stretched
+          or distorted. Write down how many <b>stitches</b> you can count in the 10 cm portion.
+          Near enough is OK.
+        </li>
+        <li>Rotate the rule now so it is going down the work, and count how many <b>rows</b>
+          you see in a 10 cm portion of the middle of the work. Again near enough is OK.
+        </li>
+      </ol>
+      <h2>4. Now make your graph paper</h2>
+      <p>Now that you have the number of stitches and rows for a 10 cm portion of
+        knitted fabric, we can insert those values into the form above and generate a
+        sheet of graph paper which has been customised for your fabric.
+      </p>
+      <p>There are some additional options that you may find useful such as sheet
+        size (A4 or A3 portrait), whether you want a darker line every 10 stitches and rows,
+        and whether you want the graph paper as a printable PDF file or whether
+        you intend to do something else with it such as edit your picture onto it,
+        which will be an SVG file.
+      </p>
+    </div>
   </div>
 </div>
 <div class="controls">
@@ -100,30 +92,48 @@
       <label>Stroke Width
         <input type="number" value="2" min="0" onchange="grid({strokeWidth:this.value})"/>
       </label>
-      <label> Size
+
+      <label>Color
+        <input class="gridColor jscolor" value="#40BDFF" onchange="grid({color:this.jscolor})"/>
+      </label>
+    </span>
+  </div>
+  <div class="control-inter">
+    <button onclick="toggle('Size', 'majorGridControls', this)">Show Size:</button>
+    <span id="majorGridControls" class="hide">
+      <label> Width
         <input type="number" value="80" min="0"
                onchange="grid({gridDimWidth:this.value})"/>
       </label>
-      <label>Color
-        <input class="gridColor" value="#000000" type="color" onchange="grid({color:this.value})"/>
+      <label> Height
+        <input type="number" value="88" min="0"
+               onchange="grid({gridDimHeight:this.value})"/>
       </label>
     </span>
   </div>
   <div class="control-inter">
     <span>Minor grid lines:
       <label>Stroke Width
-        <input type="number" value="2" min="0" onchange="smallGrid({strokeWidth:this.value})"/>
-      </label>
-      <label>Size
-        <input class="inputMaxSmallGrid" type="number" value="8" min="0"
-               onchange="smallGrid({gridDimWidth:this.value})"/>
+        <input type="number" value="2" min="0" onchange="smallGrid({strokeWidth:this})"/>
       </label>
       <label>Color
-        <input class="smallGridColor" value="#000000" type="color" onchange="smallGrid({color:this.value})"/>
+        <input class="smallGridColor jscolor" value="#FF0000" onchange="smallGrid({color:this.jscolor})"/>
       </label>
     </span>
   </div>
-</div>
+  <div class="control-inter">
+    <button onclick="toggle('Size', 'minorGridControls', this)">Show Size:</button>
+    <span id="minorGridControls" class="hide">
+      <label>Width
+        <input class="inputMaxSmallGrid" type="number" value="8" min="0"
+               onchange="smallGrid({gridDimWidth:this.value})"/>
+      </label>
+      <label>Height
+        <input class="inputMaxSmallGrid" type="number" value="13" min="0"
+               onchange="smallGrid({gridDimHeight:this.value})"/>
+      </label>
+    </span>
+  </div>
 </div>
 <div class="controls">
   <button onclick="resize()">Resize</button>
@@ -136,13 +146,13 @@
     <svg id="svg" width="212mm" height="297mm"
          xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <pattern id="smallGrid" width="8" height="8" fill="white" patternUnits="userSpaceOnUse">
+        <pattern id="smallGrid" width="8" height="13" fill="white" patternUnits="userSpaceOnUse">
           <rect id="smalRect" width="80" height="80" fill="url(#smallGrid)"></rect>
-          <path id="smallPath" d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5"></path>
+          <path id="smallPath" d="M 8 0 L 0 0 0 13" fill="none" stroke="#FF0000" stroke-width="0.5"></path>
         </pattern>
-        <pattern id="grid" width="80" height="80" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="rect" width="80" height="80" fill="url(#smallGrid)"></rect>
-          <path id="gridPath" d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="2"></path>
+        <pattern id="grid" width="80" height="88" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="rect" width="80" height="88" fill="url(#smallGrid)"></rect>
+          <path id="gridPath" d="M 80 0 L 0 0 0 88" fill="none" stroke="#40BDFF" stroke-width="2"></path>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid)"></rect>
@@ -150,7 +160,7 @@
   </div>
 </div>
 <div class="footer">
-  <p>Tested with Google Chrome version 60</p>
+  <p><a href="//github.com/moisbo/grids">https://github.com/moisbo/grids</a></p>
 </div>
 </body>
 </html>
