@@ -101,6 +101,6 @@ function generateSVG() {
 
   //set url value to a element's href attribute.
   document.getElementById("link").href = url;
-  document.getElementById("link").style = "display:inline;"
+  document.getElementById("link").className = "show"
   //you can download svg file by right click menu.
 }
