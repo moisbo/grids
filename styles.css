@@ -50,6 +50,7 @@ input[type="number"] {
 
 .sample {
   min-width: 835px;
+  min-height: 420px;
 }
 
 .view {

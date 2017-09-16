@@ -105,11 +105,11 @@
     <button onclick="toggle('Size', 'majorGridControls', this)">Show Size:</button>
     <span id="majorGridControls" class="hide">
       <label> Width
-        <input type="number" value="80" min="0"
+        <input type="number" value="94.25" min="0"
                id="widthGrid" onchange="grid({gridDimWidth:this.value})"/>
       </label>
       <label> Height
-        <input type="number" value="88" min="0"
+        <input type="number" value="104.72222222222221" min="0"
                id="heightGrid" onchange="grid({gridDimHeight:this.value})"/>
       </label>
     </span>
@@ -128,11 +128,11 @@
     <button onclick="toggle('Size', 'minorGridControls', this)">Show Size:</button>
     <span id="minorGridControls" class="hide">
       <label>Width
-        <input id="widthSmallGrid" type="number" value="8" min="0"
+        <input id="widthSmallGrid" type="number" value="18.85" min="0"
                onchange="smallGrid({gridDimWidth:this.value})"/>
       </label>
       <label>Height
-        <input id="heightSmallGrid" type="number" value="13" min="0"
+        <input id="heightSmallGrid" type="number" value="20.944444444444443" min="0"
                onchange="smallGrid({gridDimHeight:this.value})"/>
       </label>
     </span>
@@ -158,13 +158,13 @@
     <svg id="svg" width="212mm" height="297mm"
          xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <pattern id="smallGrid" width="19" height="20" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="smallRect" width="80" height="80" fill="url(#smallGrid)"></rect>
-          <path id="smallPath" d="M 19 0 L 0 0 0 20" fill="none" stroke="#FF0000" stroke-width="0.5"></path>
+        <pattern id="smallGrid" width="18.85" height="19.842105263157894" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="smallRect" width="18.85" height="19.842105263157894" fill="url(#smallGrid)"></rect>
+          <path id="smallPath" d="M 18.85 0 L 0 0 0 19.842105263157894" fill="none" stroke="#FF0000" stroke-width="0.5"></path>
         </pattern>
-        <pattern id="grid" width="95" height="100" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="rect" width="95" height="100" fill="url(#smallGrid)"></rect>
-          <path id="gridPath" d="M 95 0 L 0 0 0 100" fill="none" stroke="#40BDFF" stroke-width="2"></path>
+        <pattern id="grid" width="94.25" height="99.21052631578947" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="rect" width="94.25" height="99.21052631578947" fill="url(#smallGrid)"></rect>
+          <path id="gridPath" d="M 94.25 0 L 0 0 0 99.21052631578947" fill="none" stroke="#40BDFF" stroke-width="2"></path>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid)"></rect>

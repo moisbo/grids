@@ -69,7 +69,7 @@ function smallGrid(o) {
 
 function stich(o) {
   const widthSmallGrid = document.getElementById('widthSmallGrid');
-  const width = Math.round(377 / o.value);
+  const width = 377 / o.value;
   widthSmallGrid.value = width;
   const widthGrid = document.getElementById('widthGrid');
   widthGrid.value = width * 5;
@@ -79,7 +79,7 @@ function stich(o) {
 
 function row(o) {
   const heightSmallGrid = document.getElementById('heightSmallGrid');
-  const height = Math.round(377 / o.value);
+  const height = 377 / o.value;
   heightSmallGrid.value = height;
   const heightGrid = document.getElementById('heightGrid');
   heightGrid.value = height * 5;
