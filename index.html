@@ -79,8 +79,8 @@
 <div class="controls">
   <p><b>Settings that change the graph size</b>:</p>
   <div class="control-inter not-implemented">
-    <label>Stitch count: <input type="number" min="1" value="10" disabled/></label> and
-    <label>Row count: <input type="number" min="1" value="10" disabled/> </label>
+    <label>Stitch count: <input type="number" min="1" value="20" onchange="stich({value: this.value})"/></label> and
+    <label>Row count: <input type="number" min="1" value="19" onchange="row({value: this.value})"/> </label>
     from measuring your tension square (not implemented)
   </div>
   <div class="control-inter">
@@ -106,18 +106,18 @@
     <span id="majorGridControls" class="hide">
       <label> Width
         <input type="number" value="80" min="0"
-               onchange="grid({gridDimWidth:this.value})"/>
+               id="widthGrid" onchange="grid({gridDimWidth:this.value})"/>
       </label>
       <label> Height
         <input type="number" value="88" min="0"
-               onchange="grid({gridDimHeight:this.value})"/>
+               id="heightGrid" onchange="grid({gridDimHeight:this.value})"/>
       </label>
     </span>
   </div>
   <div class="control-inter">
     <span>Minor grid lines:
       <label>Stroke Width
-        <input type="number" value="2" min="0" onchange="smallGrid({strokeWidth:this})"/>
+        <input type="number" value="2" min="0" onchange="smallGrid({strokeWidth: this.value})"/>
       </label>
       <label>Color
         <input class="smallGridColor jscolor" value="#FF0000" onchange="smallGrid({color:this.jscolor})"/>
@@ -128,11 +128,11 @@
     <button onclick="toggle('Size', 'minorGridControls', this)">Show Size:</button>
     <span id="minorGridControls" class="hide">
       <label>Width
-        <input class="inputMaxSmallGrid" type="number" value="8" min="0"
+        <input id="widthSmallGrid" type="number" value="8" min="0"
                onchange="smallGrid({gridDimWidth:this.value})"/>
       </label>
       <label>Height
-        <input class="inputMaxSmallGrid" type="number" value="13" min="0"
+        <input id="heightSmallGrid" type="number" value="13" min="0"
                onchange="smallGrid({gridDimHeight:this.value})"/>
       </label>
     </span>
@@ -144,25 +144,36 @@
   <a class="hide" id="link" href="" download="pattern.svg">Download SVG</a>
 </div>
 <div>
+  <button onclick="location.reload()">Refresh</button>
+</div>
+<div class="sample">
   <p>Sample</p>
+  <svg class="ruler" width="1mm" height="10cm">
+    <rect width="100%" height="100%" fill="url(#grid)"></rect>
+  </svg>
+  <svg class="ruler-top" width="10cm" height="1mm">
+    <rect width="100%" height="100%" fill="url(#grid)"></rect>
+  </svg>
   <div class="view">
     <svg id="svg" width="212mm" height="297mm"
          xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <pattern id="smallGrid" width="8" height="13" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="smalRect" width="80" height="80" fill="url(#smallGrid)"></rect>
-          <path id="smallPath" d="M 8 0 L 0 0 0 13" fill="none" stroke="#FF0000" stroke-width="0.5"></path>
+        <pattern id="smallGrid" width="19" height="20" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="smallRect" width="80" height="80" fill="url(#smallGrid)"></rect>
+          <path id="smallPath" d="M 19 0 L 0 0 0 20" fill="none" stroke="#FF0000" stroke-width="0.5"></path>
         </pattern>
-        <pattern id="grid" width="80" height="88" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="rect" width="80" height="88" fill="url(#smallGrid)"></rect>
-          <path id="gridPath" d="M 80 0 L 0 0 0 88" fill="none" stroke="#40BDFF" stroke-width="2"></path>
+        <pattern id="grid" width="95" height="100" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="rect" width="95" height="100" fill="url(#smallGrid)"></rect>
+          <path id="gridPath" d="M 95 0 L 0 0 0 100" fill="none" stroke="#40BDFF" stroke-width="2"></path>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid)"></rect>
     </svg>
+
   </div>
 </div>
 <div class="footer">
+  <p>For this page code visit: </p>
   <p><a href="//github.com/moisbo/grids">https://github.com/moisbo/grids</a></p>
 </div>
 </body>

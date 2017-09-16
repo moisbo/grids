@@ -56,7 +56,7 @@ function smallGrid(o) {
     path.setAttribute('stroke', o.color.toRGBString() || strokeColor);
   }
   //rect
-  const rect = document.getElementById('smalRect');
+  const rect = document.getElementById('smallRect');
   const rectDim = {width: rect.getAttribute('width'), height: rect.getAttribute('height')};
   rect.setAttribute('width', o.rectDimWidth || rectDim.width);
   rect.setAttribute('height', o.rectDimHeight || rectDim.height);
@@ -67,6 +67,25 @@ function smallGrid(o) {
   grid.setAttribute('height', o.gridDimHeight || gridDim.height);
 }
 
+function stich(o) {
+  const widthSmallGrid = document.getElementById('widthSmallGrid');
+  const width = Math.round(377 / o.value);
+  widthSmallGrid.value = width;
+  const widthGrid = document.getElementById('widthGrid');
+  widthGrid.value = width * 5;
+  smallGrid({gridDimWidth: width});
+  grid({gridDimWidth: width * 5});
+}
+
+function row(o) {
+  const heightSmallGrid = document.getElementById('heightSmallGrid');
+  const height = Math.round(377 / o.value);
+  heightSmallGrid.value = height;
+  const heightGrid = document.getElementById('heightGrid');
+  heightGrid.value = height * 5;
+  smallGrid({gridDimHeight: height});
+  grid({gridDimHeight: height * 5});
+}
 
 function resize() {
   const svg = document.getElementById('svg');
