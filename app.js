@@ -58,8 +58,8 @@ function smallGrid(o) {
   //rect
   const rect = document.getElementById('smallRect');
   const rectDim = {width: rect.getAttribute('width'), height: rect.getAttribute('height')};
-  rect.setAttribute('width', o.rectDimWidth || rectDim.width);
-  rect.setAttribute('height', o.rectDimHeight || rectDim.height);
+  rect.setAttribute('width', o.gridDimWidth || rectDim.width);
+  rect.setAttribute('height', o.gridDimHeight || rectDim.height);
   //smallGrid
   const grid = document.getElementById('smallGrid');
   const gridDim = {width: grid.getAttribute('width'), height: grid.getAttribute('height')};
@@ -115,11 +115,8 @@ function generateSVG() {
   //add xml declaration
   source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
 
-  //convert svg source to URI data scheme.
   const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
 
-  //set url value to a element's href attribute.
   document.getElementById("link").href = url;
   document.getElementById("link").className = "show"
-  //you can download svg file by right click menu.
 }
