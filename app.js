@@ -26,10 +26,12 @@ function grid(o) {
   //stroke-width
   const strokeWidth = path.getAttribute('stroke-width');
   path.setAttribute('stroke-width', o.strokeWidth || strokeWidth);
+  path.style.strokeWidth = o.strokeWidth || strokeWidth;
   //color
   if (o.color) {
     const strokeColor = path.getAttribute('stroke');
     path.setAttribute('stroke', o.color.toRGBString() || strokeColor);
+    path.style.stroke = o.color.toRGBString() || strokeColor;
   }
   //rect
   const rect = document.getElementById('rect');
@@ -50,10 +52,12 @@ function smallGrid(o) {
   //stroke-width
   const strokeWidth = path.getAttribute('stroke-width');
   path.setAttribute('stroke-width', o.strokeWidth || strokeWidth);
+  path.style.strokeWidth = o.strokeWidth || strokeWidth;
   //color
   if (o.color) {
     const strokeColor = path.getAttribute('stroke');
     path.setAttribute('stroke', o.color.toRGBString() || strokeColor);
+    path.style.stroke = o.color.toRGBString() || strokeColor;
   }
   //rect
   const rect = document.getElementById('smallRect');
