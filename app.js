@@ -127,3 +127,8 @@ function generateSVG() {
   const row = document.getElementById('row');
   document.getElementById("link").download = 'S' + stich.value + '-R' + row.value + '.svg';
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  stich({value: document.getElementById('stich').value});
+  row({value: document.getElementById('row').value})
+});
