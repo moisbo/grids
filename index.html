@@ -80,8 +80,10 @@
 <div class="controls">
   <p><b>Settings that change the graph size</b>:</p>
   <div class="control-inter not-implemented">
-    <label>Stitch count: <input type="number" min="1" value="20" onchange="stich({value: this.value})"/></label> and
-    <label>Row count: <input type="number" min="1" value="19" onchange="row({value: this.value})"/> </label>
+    <label>Stitch count: <input type="number" id="stich" min="1" value="20"
+                                onchange="stich({value: this.value})"/></label> and
+    <label>Row count: <input type="number" id="row" min="1" value="19"
+                             onchange="row({value: this.value})"/> </label>
     from measuring your tension square
   </div>
   <div class="control-inter">
@@ -191,12 +193,12 @@
         <pattern id="grid" width="94.25" height="99.21052631578947" fill="white" patternUnits="userSpaceOnUse">
           <rect id="rect" width="94.25" height="99.21052631578947" fill="url(#smallGrid)"></rect>
           <path id="gridPath" d="M 94.25 0 L 0 0 0 99.21052631578947" fill="none" stroke="#40BDFF"
-                stroke-width="2" style="" ></path>
+                stroke-width="2" style=""></path>
         </pattern>
         <pattern id="smallGrid" width="18.85" height="19.842105263157894" fill="white" patternUnits="userSpaceOnUse">
           <rect id="smallRect" width="18.85" height="19.842105263157894" fill="url(#smallGrid)"></rect>
           <path id="smallPath" d="M 18.85 0 L 0 0 0 19.842105263157894" fill="none" stroke="#3D3D3D"
-                stroke-width="0.5" style="" ></path>
+                stroke-width="0.5" style=""></path>
         </pattern>
       </defs>
       <rect width="100%" class="smallGrid" height="100%" fill="url(smallGrid)"></rect>

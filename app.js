@@ -73,7 +73,7 @@ function smallGrid(o) {
 
 function stich(o) {
   const widthSmallGrid = document.getElementById('widthSmallGrid');
-  const width = 377 / o.value;
+  const width = 377.9527559055 / o.value;
   widthSmallGrid.value = width;
   const widthGrid = document.getElementById('widthGrid');
   widthGrid.value = width * 5;
@@ -83,7 +83,7 @@ function stich(o) {
 
 function row(o) {
   const heightSmallGrid = document.getElementById('heightSmallGrid');
-  const height = 377 / o.value;
+  const height = 377.9527559055 / o.value;
   heightSmallGrid.value = height;
   const heightGrid = document.getElementById('heightGrid');
   heightGrid.value = height * 5;
@@ -122,5 +122,8 @@ function generateSVG() {
   const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
 
   document.getElementById("link").href = url;
-  document.getElementById("link").className = "show"
+  document.getElementById("link").className = "show";
+  const stich = document.getElementById('stich');
+  const row = document.getElementById('row');
+  document.getElementById("link").download = 'S' + stich.value + '-R' + row.value + '.svg';
 }
