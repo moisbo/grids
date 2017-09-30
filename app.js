@@ -1,8 +1,8 @@
-function toggle(name, id, o) {
+function toggle(msg, name, id, o) {
   const help = document.getElementById(id);
   if (help.className === 'show') {
     help.className = 'hide';
-    o.innerHTML = 'Show ' + name;
+    o.innerHTML = msg + ' ' + name;
   } else {
     help.className = 'show';
     o.innerHTML = 'Hide ' + name;
@@ -71,9 +71,13 @@ function smallGrid(o) {
   grid.setAttribute('height', o.gridDimHeight || gridDim.height);
 }
 
-function stich(o) {
+function stich(o, dpiGen) {
   const widthSmallGrid = document.getElementById('widthSmallGrid');
-  const width = 285 / o.value;
+  let dpiValue = 378;
+  if (dpiGen) {
+    dpiValue = dpiGen;
+  }
+  const width = dpiValue / o.value;
   widthSmallGrid.value = width;
   const widthGrid = document.getElementById('widthGrid');
   widthGrid.value = width * 5;
@@ -81,9 +85,13 @@ function stich(o) {
   grid({gridDimWidth: width * 5});
 }
 
-function row(o) {
+function row(o, dpiGen) {
   const heightSmallGrid = document.getElementById('heightSmallGrid');
-  const height = 285 / o.value;
+  let dpiValue = 378;
+  if (dpiGen) {
+    dpiValue = dpiGen;
+  }
+  const height = dpiValue / o.value;
   heightSmallGrid.value = height;
   const heightGrid = document.getElementById('heightGrid');
   heightGrid.value = height * 5;
@@ -102,6 +110,9 @@ function resize() {
 
 function generateSVG() {
   //get svg element.
+  const dpi = document.getElementById('dpi');
+  let dpiValue = dpi.options[dpi.selectedIndex].value;
+  init(dpiValue);
   const svg = document.getElementById("svg");
 
   //get svg source.
@@ -121,14 +132,20 @@ function generateSVG() {
 
   const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
 
-  document.getElementById("link").href = url;
-  document.getElementById("link").className = "show";
+  const link = document.getElementById("link");
+  link.href = url;
   const stich = document.getElementById('stich');
   const row = document.getElementById('row');
-  document.getElementById("link").download = 'S' + stich.value + '-R' + row.value + '.svg';
+  link.download = 'S' + stich.value + '-R' + row.value + '.svg';
+  init();
+  link.className = "show";
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  stich({value: document.getElementById('stich').value});
-  row({value: document.getElementById('row').value})
+  init();
 });
+
+function init(dpi) {
+  stich({value: document.getElementById('stich').value}, dpi);
+  row({value: document.getElementById('row').value}, dpi);
+}

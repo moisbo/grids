@@ -68,3 +68,9 @@ input[type="number"] {
   float: left;
   top: 18px;
 }
+
+.generate {
+  height: 24px;
+  width: 96px;
+  cursor: pointer;
+}

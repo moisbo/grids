@@ -20,7 +20,7 @@
     you to create some graph paper that matches your knitting. If you have not used this
     web application before then please read the help below.
   </p>
-  <button onclick="toggle('Help', 'help', this)">Show Help</button>
+  <button onclick="toggle('Show' ,'Help', 'help', this)">Show Help</button>
   <div class="hide" id="help">
     <div class="help">
       <h2>1. Create the test swatch</h2>
@@ -69,7 +69,7 @@
         sheet of graph paper which has been customised for your fabric.
       </p>
       <p>There are some additional options that you may find useful such as sheet
-        size (A4 or A3 portrait), whether you want a darker line every 10 stitches and rows,
+        size, whether you want a darker line every 10 stitches and rows,
         and whether you want the graph paper as a printable PDF file or whether
         you intend to do something else with it such as edit your picture onto it,
         which will be an SVG file.
@@ -84,11 +84,12 @@
                                 onchange="stich({value: this.value})"/></label> and
     <label>Row count: <input type="number" id="row" min="1" value="19"
                              onchange="row({value: this.value})"/> </label>
-    from measuring your tension square
+    per 10 cm of fabric from measuring your tension square
   </div>
   <div class="control-inter">
-    <label>Graph width: <input type="number" value="212" id="width"/>mm</label>
-    <label>Graph height: <input type="number" value="297" id="height"/>mm</label>
+    <label>Graph width: <input type="number" value="212" id="width"/>&nbsp;mm</label>
+    <label>Graph height: <input type="number" value="297" id="height"/>&nbsp;mm</label>
+    <button onclick="resize()">Resize Graph</button>
   </div>
 </div>
 <div class="controls">
@@ -105,7 +106,7 @@
     </span>
   </div>
   <div class="control-inter">
-    <button onclick="toggle('Size', 'majorGridControls', this)">Show Size:</button>
+    <button onclick="toggle('Show', 'Size', 'majorGridControls', this)">Show Size:</button>
     <span id="majorGridControls" class="hide">
       <label> Width
         <input type="number" value="94.25" min="0"
@@ -120,7 +121,7 @@
   <div class="control-inter">
     <span>Minor grid lines:
       <label>Stroke Width
-        <input type="number" value="2" min="0" onchange="smallGrid({strokeWidth: this.value})"/>
+        <input type="number" value="0.5" min="0" onchange="smallGrid({strokeWidth: this.value})"/>
       </label>
       <label>Color
         <input class="smallGridColor jscolor" value="#3D3D3D" onchange="smallGrid({color:this.jscolor})"/>
@@ -128,7 +129,7 @@
     </span>
   </div>
   <div class="control-inter">
-    <button onclick="toggle('Size', 'minorGridControls', this)">Show Size:</button>
+    <button onclick="toggle('Show', 'Size', 'minorGridControls', this)">Show Size:</button>
     <span id="minorGridControls" class="hide">
       <label>Width
         <input id="widthSmallGrid" type="number" value="18.85" min="0"
@@ -142,9 +143,15 @@
   </div>
 </div>
 <div class="controls">
-  <button onclick="resize()">Resize</button>
-  <button onclick="generateSVG()">Generate SVG</button>
-  <a class="hide" id="link" href="" download="pattern.svg">Download SVG</a>
+  <p>Select DPI
+    <select id="dpi"> <!--Supplement an id here instead of using 'name'-->
+      <option value="283" selected>72 (Default for AI)</option>
+      <option value="378">96 (Default for Web)</option>
+    </select>
+  </p>
+  <button class="generate" onclick="generateSVG()">Generate SVG</button>
+  <a class="hide" id="link" href="" download="pattern.svg" onclick="toggle('', 'Download SVG', 'link', this)">Download
+    SVG</a>
 </div>
 <div>
   <button onclick="location.reload()">Refresh</button>
@@ -162,11 +169,11 @@
          xmlns="http://www.w3.org/2000/svg">
       <style type="text/css">
         .grid {
-          fill: url('#grid');
+          fill: url("#grid");
         }
 
         .smallGrid {
-          fill: url('#smallGrid');
+          fill: url("#smallGrid");
         }
 
         #grid {
@@ -190,21 +197,20 @@
         }
       </style>
       <defs>
-        <pattern id="grid" width="94.25" height="99.21052631578947" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="rect" width="94.25" height="99.21052631578947" fill="url(#smallGrid)"></rect>
-          <path id="gridPath" d="M 94.25 0 L 0 0 0 99.21052631578947" fill="none" stroke="#40BDFF"
+        <pattern id="grid" width="0" height="0" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="rect" width="0" height="0" fill="url(#smallGrid)"></rect>
+          <path id="gridPath" d="M 0 0 L 0 0 0 0" fill="none" stroke="#40BDFF"
                 stroke-width="2" style=""></path>
         </pattern>
-        <pattern id="smallGrid" width="18.85" height="19.842105263157894" fill="white" patternUnits="userSpaceOnUse">
-          <rect id="smallRect" width="18.85" height="19.842105263157894" fill="url(#smallGrid)"></rect>
-          <path id="smallPath" d="M 18.85 0 L 0 0 0 19.842105263157894" fill="none" stroke="#3D3D3D"
+        <pattern id="smallGrid" width="0" height="0" fill="white" patternUnits="userSpaceOnUse">
+          <rect id="smallRect" width="0" height="0" fill="url(#smallGrid)"></rect>
+          <path id="smallPath" d="M 0 0 L 0 0 0 0" fill="none" stroke="#3D3D3D"
                 stroke-width="0.5" style=""></path>
         </pattern>
       </defs>
       <rect width="100%" class="smallGrid" height="100%" fill="url(smallGrid)"></rect>
       <rect width="100%" class="grid" height="100%" fill="url(#grid)"></rect>
     </svg>
-
   </div>
 </div>
 <div class="footer">
